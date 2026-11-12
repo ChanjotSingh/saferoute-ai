@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SafeRoute AI | Traffic Risk Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQy+hmNHrzRCf9q1eCHT+DR0e1TQnQb2kZ0RRaQn5zD0CBowKEP3gYl9O8KxYEmV+JtLp0C2bA==" crossorigin="">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">S</span><span>SafeRoute <b>AI</b></span></div>
+    <p class="eyebrow">Decision intelligence</p>
+    <nav><a class="active" href="#overview">Overview</a><a href="#hotspots">Hotspot analysis</a><a href="#predict">Risk prediction</a><a href="#models">Model performance</a></nav>
+    <div class="sidebar-bottom"><span class="live-dot"></span>Demo data - Delhi NCR<br><small>Updated for presentation</small></div>
+  </aside>
+  <main>
+    <header><div><p class="eyebrow">Road safety command center</p><h1>See risk <em>before</em> it happens.</h1></div><div class="header-meta"><span>16 Sep 2026</span><button id="resetBtn">Reset scenario</button></div></header>
+    <section id="overview" class="metrics" aria-label="Safety overview">
+      <article><span>Observed incidents</span><strong>2,847</strong><small>Historical sample records</small></article>
+      <article><span>Active hotspot zones</span><strong>12</strong><small class="orange">3 require attention</small></article>
+      <article><span>Model F1 score</span><strong>0.89</strong><small class="green">Random Forest selected</small></article>
+      <article><span>Highest risk window</span><strong>18:00</strong><small>Evening commute period</small></article>
+    </section>
+    <section id="hotspots" class="panel map-panel"><div class="section-head"><div><p class="eyebrow">Spatial patterns</p><h2>Accident hotspot analysis</h2></div><div class="legend"><i class="high"></i> High <i class="med"></i> Medium <i class="low"></i> Low</div></div><div id="map"></div><div class="map-note">Clusters are illustrative DBSCAN-style hotspots. Select a zone to inspect its profile.</div></section>
+    <section class="lower-grid">
+      <section id="predict" class="panel predictor"><div class="section-head"><div><p class="eyebrow">Scenario tool</p><h2>Risk prediction</h2></div><span class="pill">Interactive</span></div>
+        <form id="riskForm"><label>Time of day<select id="hour"><option value="8">08:00 - morning commute</option><option value="14">14:00 - daytime</option><option value="18" selected>18:00 - evening commute</option><option value="23">23:00 - late night</option></select></label><label>Weather<select id="weather"><option value="clear">Clear</option><option value="rain" selected>Rain</option><option value="fog">Fog</option></select></label><label>Road type<select id="road"><option value="arterial" selected>Arterial road</option><option value="highway">Highway</option><option value="local">Local street</option><option value="junction">Major junction</option></select></label><label>Traffic volume<input id="traffic" type="range" min="1" max="5" value="4"><output id="trafficOut">High</output></label><label>Speed limit<select id="speed"><option value="30">30 km/h</option><option value="50" selected>50 km/h</option><option value="70">70 km/h</option><option value="90">90 km/h</option></select></label><button class="primary" type="submit">Calculate risk</button></form>
+      </section>
+      <section class="panel score-panel"><p class="eyebrow">Prediction result</p><div class="score-line"><strong id="score">78</strong><span>/100<br>risk score</span></div><div class="meter"><span id="meterFill"></span></div><div class="risk-badge" id="riskBadge">HIGH RISK</div><p id="riskText">Conditions call for additional caution and targeted monitoring.</p><div class="factors" id="factors"></div></section>
+    </section>
+    <section id="models" class="panel models"><div class="section-head"><div><p class="eyebrow">Validation summary</p><h2>Model performance</h2></div><span class="muted">80/20 stratified test split</span></div><div class="model-grid"><div class="model-table"><div class="table-row table-head"><span>Model</span><span>Accuracy</span><span>F1 score</span></div><div class="table-row"><span>Logistic Regression</span><span>0.76</span><span>0.74</span></div><div class="table-row"><span>Decision Tree</span><span>0.81</span><span>0.79</span></div><div class="table-row selected"><span>Random Forest <b>Selected</b></span><span>0.91</span><span>0.89</span></div><div class="table-row"><span>XGBoost</span><span>0.90</span><span>0.88</span></div></div><div class="bars" aria-label="F1 score comparison"><div><span>Logistic</span><i style="--w:74%"></i><b>74%</b></div><div><span>Tree</span><i style="--w:79%"></i><b>79%</b></div><div><span>Forest</span><i class="best" style="--w:89%"></i><b>89%</b></div><div><span>XGBoost</span><i style="--w:88%"></i><b>88%</b></div></div></div></section>
+    <footer>SafeRoute AI - academic prototype. Predictions support, but never replace, qualified traffic-safety decisions.</footer>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><script src="app.js"></script>
+</body>
+</html>
